@@ -1,3 +1,4 @@
+
 # encoding: utf-8
 # Sample localization file for English. Add more files in this directory for other locales.
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
@@ -308,6 +309,7 @@ en:
     unflag_by: "Unflagged"
     unflag_label: "Unflag"
     unflag_error_message: "Please explain why you are unflagging this record."
+    flag_comments: "Flag Additional Comments"
     id_of_record_this_duplicate_of: "Enter the ID of the record this is a duplicate of:"
     duplicate_header: "Marking %{child_name} as Duplicate"
     flag_error_message: "Please explain why you are flagging this record."
@@ -2219,6 +2221,8 @@ en:
     location_label: "Location"
 
   reassign:
+    success: "%{record_type} %{id} successfully assigned"
+    success_batch: "%{success_count} Assign(s) successfully made"
     reassign_case_title: "Assign case(s) to:"
     existing_user_label: "Existing user"
     user_mandatory: "User name is required"

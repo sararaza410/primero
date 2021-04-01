@@ -8,6 +8,21 @@
         <% if display_actions %>
           <%= render partial: 'record_shared/actions', locals: {model: model} %>
         <% end %>
+
+        <% if record == 'case' && !current_user.roles.map(&:name).include?('Referral') %>
+          <ul id="menu" class="dropdown menu" data-dropdown-menu>
+            <li class="init_btn">
+              <a data-toggle="button left action_btn" data-close-on-click="true" class="button"><%= content_tag(:span, 'New Case') %></a>
+              <ul class="menu">
+                <% modules.each do |primero_module| %>
+                  <li>
+                    <%= content_tag( :a, primero_module.name, :class => 'dropdown_link', :'href' => new_polymorphic_path(record, module_id: primero_module.id)) %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>

@@ -41,6 +41,8 @@ Primero = _primero.Views.Base.extend({
     _primero.date_not_future = this.date_not_future;
     _primero.valid_datepicker_value = this.valid_datepicker_value;
     _primero.abide_validator_positive_number = this.abide_validator_positive_number;
+    _primero.abide_validator_child_age = this.abide_validator_child_age;
+    _primero.abide_validator_contact_no = this.abide_validator_contact_no;
     _primero.valid_positive_number_value = this.valid_positive_number_value;
     _primero.generate_download_link = this.generate_download_link;
     _primero.init_autosize = this.init_autosize;
@@ -744,6 +746,34 @@ Primero = _primero.Views.Base.extend({
     if (!required && !$el.val()) return true;
     if ($el && $el.attr("disabled") !== "disabled") {
       return _primero.valid_positive_number_value($el.val(), required);
+    } else {
+      return true;
+    }
+  },
+
+  abide_validator_child_age: function($el, required, parent) {
+    if (!required && !$el.val()) return true;
+    if ($el && $el.attr("disabled") !== "disabled") {
+      value = $el.val();
+      if (value !== "") {
+        return !isNaN(value) && value >= 5 && value < 18;
+      } else {
+        return !required;
+      }
+    } else {
+      return true;
+    }
+  },
+
+  abide_validator_contact_no: function($el, required, parent) {
+    if (!required && !$el.val()) return true;
+    if ($el && $el.attr("disabled") !== "disabled") {
+      value = $el.val();
+      if (value !== "") {
+        return value.match(/^\d{11}$/) != null;
+      } else {
+        return !required;
+      }
     } else {
       return true;
     }

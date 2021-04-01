@@ -2,10 +2,18 @@ class Flag
   include Syncable::PrimeroEmbeddedModel
   include PrimeroModel
 
+  REASONS = [
+              'Lack of needed services', 'Long waitlist', 'Delayed or No Communication from service provider', 'Service provider not available for case conference',
+              'Multiple case conferences required causing delay', 'Transportation', 'Demand on client time', 'Fees', 'Delay in services provisions', 'Non-cooperative client',
+              'Client Resistance', 'Client Relocating', 'Client influenced by local influential', 'Child reported as missing during an ongoing case', 'Family Conflict',
+              'Feelings of intimidation', 'Client capacity issues', 'CPO negligence or abandonment of client', 'Incorrect information by client'
+            ]
+
   validate :validate_record
 
   property :date, Date
   property :message, String
+  property :comments, String
   property :flagged_by, String
   property :removed, TrueClass
   property :unflag_message, String

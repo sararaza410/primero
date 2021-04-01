@@ -10,7 +10,7 @@ _primero.Views.FlagChild = _primero.Views.Base.extend({
 
   initialize: function() {
     var self = this;
-    
+
     $('body').on('show.zf.dropdown', function(e) {
       self.generate_form($(e.target));
       e.stopPropagation();
@@ -45,7 +45,10 @@ _primero.Views.FlagChild = _primero.Views.Base.extend({
       submit_error_message: dropdown.data('submit_error_message'),
       unflag_date: dropdown.data('message_unflag_date'),
       unflag_by: dropdown.data('message_unflag_by'),
-      unflagged_label: dropdown.data('message_unflagged_label')
+      unflagged_label: dropdown.data('message_unflagged_label'),
+      message_comments_label: dropdown.data('message_comments_label'),
+      message_comments_id: dropdown.data('message_comments_id'),
+      flag_reasons: dropdown.data('flag_reasons')
     };
     dropdown.find('.add_flag_form').html(JST['templates/flag_record_form'](this.data));
 

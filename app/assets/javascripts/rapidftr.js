@@ -111,7 +111,7 @@ RapidFTR.Utils = {
 
     enableFormErrorChecking: function() {
         $('.dropdown').delegate(".mark-as-submit", 'click', function(){
-            if($(this).parents("form").find("input.flag_message").val()==""){
+            if($(this).parents("form").find("select.flag_message").val()==""){
                 alert($(this).attr('data-error-message'));
                 return false;
             }

@@ -1,7 +1,8 @@
+<% label = is_phone_field?(field.name) ? [field.display_name, '(+92)'].join(' ') : field.display_name %>
 <div class="row align-middle">
   <div class="medium-4 columns">
     <%# TODO - need to refactor this translation logic %>
-    <label class="key <%= field.name %>"><%= field.display_name %></label>
+    <label class="key <%= field.name %>"><%= label %></label>
   </div>
   <div class="medium-8 columns">
     <% if field.link_to_path.present? %>

@@ -7,9 +7,11 @@
     <input type="text" name="id_number" required />
     <span class="form-error" data-form-error-for="id_number"><%= t('case.id_number_required') %></span>
     <div class="row collapse">
-      <div class="column">
-        <%= link_to t('case.create_new_case'), new_polymorphic_path(record, module_id: primero_module.id), class: 'button' %>
-      </div>
+      <% unless record == 'case' %>
+        <div class="column">
+          <%= link_to t('case.create_new_case'), new_polymorphic_path(record, module_id: primero_module.id), class: 'button' %>
+        </div>
+      <% end %>  
       <div class="column shrink">
         <%= link_to t('search'), '', class: 'button', id: 'search-id', data: { module: primero_module.id } %>
       </div>

@@ -380,7 +380,7 @@ en:
       bia_form: BIA Form
       photos_audio: Photos and Audio
       other_documents: Other Documents
-      referrals_transfers: Referrals and Transfers
+      referrals_transfers: Referrals
       notes: Notes
   lookup-form-group-cp-incident:
     name: Form Groups   Cp Incident
@@ -410,7 +410,7 @@ en:
       case_closure: Case Closure
       client_feedback: Client Feedback
       identification_registration: Identification / Registration
-      referrals_transfers: Referrals and Transfers
+      referrals_transfers: Referrals
       other_reportable_fields: Other Reportable Fields
   lookup-form-group-gbv-incident:
     name: Form Groups   Gbv Incident

@@ -218,6 +218,18 @@ function on_ready() {
   $(".locale").change( function(event){
     setTranslationFields(event.target);
   });
+
+  if ($('.cp_alternative_care_placement_form .chosen-select').length > 0) {
+    $chosen = $(this).chosen();
+    var chosen = $chosen.data("chosen");
+    var _fn = chosen.result_select;
+    chosen.result_select = function(evt) {
+    evt["metaKey"] = true;
+    evt["ctrlKey"] = true;
+    chosen.result_highlight.addClass("result-selected");
+    return _fn.call(chosen, evt);
+    };
+  };
 };
 
 $(on_ready);

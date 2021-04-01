@@ -210,5 +210,15 @@ module FormSectionHelper
     #If there is no field in the section, assumed as invalid section, section should have at least one field.
     false
   end
-
+  def referral_user_and_transition?(subform_instance, subform)
+    !current_user.roles.map(&:name).include?('Referral') ||
+    (current_user.roles.map(&:name).include?('Referral') && subform_instance.present? &&
+      ((subform.name == 'cp_response_form_subform_goal_details_as_per_the_case_plan' &&
+       subform_instance.try(:user_providing_response) == current_user.user_name) ||
+       (subform_instance.instance_of?(Transition) &&
+        subform_instance.type == Transition::TYPE_REFERRAL &&
+        subform_instance.is_assigned_to_user_local?(current_user.user_name))
+      )
+     )
+  end
 end

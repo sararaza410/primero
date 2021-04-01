@@ -54,6 +54,14 @@ function primero() {
     return _primero.abide_validator_positive_number(el, required, parent);
   }
 
+  Foundation.Abide.defaults.validators['primeroChildAge'] = function(el, required, parent) {
+    return _primero.abide_validator_child_age(el, required, parent);
+  }
+
+  Foundation.Abide.defaults.validators['primeroContactNo'] = function(el, required, parent) {
+    return _primero.abide_validator_contact_no(el, required, parent);
+  }
+
   new _primero.Router();
 
   Backbone.history.start({ pushState: true, hashChange: false })

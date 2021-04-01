@@ -242,4 +242,8 @@ module FieldsHelper
     loc = Primero::Application::locales_with_description.select{|loc| loc[1] == locale.to_s}[0]
     loc.present? ? loc[0] : locale
   end
+
+  def is_phone_field?(field_id)
+    field_id.include?('mobile') || field_id.include?('phone') || field_id.include?('contact') || field_id.include?('landline')
+  end
 end

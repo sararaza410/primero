@@ -349,7 +349,13 @@ module TransitionActions
       else
         flash[:notice] = t('referral.success_batch', success_count: success_count)
       end
-    elsif is_transfer? || is_reassign?
+    elsif is_reassign?
+      if is_single_or_batch? == 'single'
+        flash[:notice] = t('reassign.success', record_type: record_type, id: record_id)
+      else
+        flash[:notice] = t('reassign.success_batch', success_count: success_count)
+      end
+    elsif is_transfer?
       if is_single_or_batch? == 'single'
         flash[:notice] = t('transfer.success', record_type: record_type, id: record_id)
       else

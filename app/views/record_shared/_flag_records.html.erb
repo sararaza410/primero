@@ -1,3 +1,4 @@
+
 <a class="button" data-open="<%= "#{model.name.underscore.downcase}_flag_records" %>">
   <%= t("buttons.flag_records") %>
 </a>
@@ -8,14 +9,20 @@
     <div class="row">
       <div class="column">
         <label for="<%=model.name.underscore.downcase%>_flag_message"><%=t("#{model.name.underscore.downcase}.flag_reason")%></label>
-        <input type="text" class="flag_message" value="" size="30" name="flag_message" id="<%=model.name.underscore.downcase%>_flag_message" autocomplete="off">
+        <%= select_tag "#{model.name.underscore.downcase}_flag_message", options_for_select(Flag::REASONS.sort.map {|r| [r, r]}), class: "flag_message" %>
+
       </div>
       <div class="column">
         <label for="<%=model.name.underscore.downcase%>_flag_date"><%=t("#{model.name.underscore.downcase}.flag_reason_date")%></label>
         <input type="text" class="form_date_field flag_date" size="12" name="flag_date" id="<%=model.name.underscore.downcase%>_flag_date" autocomplete="off" data-validator="primeroDate">
       </div>
     </div>
+
     <div class="row flag_records_controls">
+      <div class="column">
+        <label for="<%=model.name.underscore.downcase%>_flag_comments"><%= t("#{model.name.underscore.downcase}.flag_comments") %></label>
+        <textarea id="<%= model.name.underscore.downcase %>_flag_comments" class="flag_comments" name="flag_comments">Enter Additional Comments  here...</textarea>
+      </div>
       <div class="column">
         <a class="flag button" style="margin-top:1.3rem"
           data-request_url="<%= request.url %>"

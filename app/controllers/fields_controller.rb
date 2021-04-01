@@ -24,6 +24,7 @@ class FieldsController < ApplicationController
 
     if @field.errors.present? || @form_section.errors.present?
       get_form_groups
+      @form_section.fields.pop
       @show_add_field = { :show_add_field => @field.errors.present? }
       render :template => "form_section/edit", :locals => @show_add_field
     else

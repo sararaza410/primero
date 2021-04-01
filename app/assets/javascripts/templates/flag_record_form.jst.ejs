@@ -5,17 +5,30 @@
     <input name="authenticity_token" type="hidden" value="<%=  authenticity_token  %>">
     <input id="<%=  model  %>_redirect_url" name="redirect_url" type="hidden" value="<%=  redirect_url  %>">
   </div>
-  <div class="row add_flag align-bottom collapse">
-    <div class="column">
-      <label for="<%= model %>_<%= message_id %>"><%= message %></label>
-      <input id="<%= model %>_<%= message_id %>" name="<%= message_id %>" size="30" type="text" value="" class="flag_message">
-    </div>
-    <div class="column">
-      <label for="<%= model %>_<%= message_date_id %>"><%= message_date %></label>
-      <input id="<%= model %>_<%= message_date_id %>" name="<%= message_date_id %>" size="12" type="text" class="form_date_field">
-    </div>
-    <div class="column">
-      <input class="mark-as-submit button flag_submit" data-error-message="<%= submit_error_message %>" id="<%= model %>_submit" name="commit" type="submit" value="<%= submit_label %>">
-    </div>
+  <div class="align-bottom collapse">
+    <div class="row">
+      <div class="column">
+        <label for="<%= model %>_<%= message_id %>"><%= message %></label>
+        <select name="<%= message_id %>" id="<%= model %>_<%= message_id %>" class="flag_message">
+          <% for(var i = 0; i < flag_reasons.length ; i++) { %>
+            <option value='<%= flag_reasons[i] %>'><%= flag_reasons[i] %></option>
+          <% } %>
+        </select>
+      </div> 
+
+      <div class="column">
+        <label for="<%= model %>_<%= message_date_id %>"><%= message_date %></label>
+        <input id="<%= model %>_<%= message_date_id %>" name="<%= message_date_id %>" size="12" type="text" class="form_date_field">
+      </div>
+    </div>    
+    <div class="row">
+      <div class="column">
+        <label for="<%= model %>_<%= message_comments_id %>"><%= message_comments_label %></label>
+        <textarea id="<%= model %>_<%= message_comments_id %>" name="<%= message_comments_id %>" class="flag_comments">Enter Additional Comments  here...</textarea>
+      </div>
+      <div class="column">
+        <input class="mark-as-submit button flag_submit" style="margin-top:1.3rem;" data-error-message="<%= submit_error_message %>" id="<%= model %>_submit" name="commit" type="submit" value="<%= submit_label %>">
+      </div>
+   </div>
   </div>
 </form>

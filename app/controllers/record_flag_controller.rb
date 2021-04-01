@@ -10,7 +10,7 @@ class RecordFlagController < ApplicationController
 
   def flag
     authorize! :flag, @record
-    flag = @record.add_flag(params[:flag_message], params[:flag_date], current_user_name)
+    flag = @record.add_flag(params[:flag_message], params[:flag_comments], params[:flag_date], current_user_name)
     if @record.save
       render :json => flag if params[:redirect_url].blank?
     else
@@ -58,7 +58,7 @@ class RecordFlagController < ApplicationController
       end
 
       records_to_flag.each do |record|
-        record.add_flag(params[:flag_message], params[:flag_date], current_user_name)
+        record.add_flag(params[:flag_message], params[:flag_comments], params[:flag_date], current_user_name)
         #TODO: Removed the error message. We don't really need it. May need to catch errors thrown by batch update below
         #error_message += "\n#{I18n.t("messages.record_not_flagged_message", short_id: record.short_id)}" unless record.valid?
       end

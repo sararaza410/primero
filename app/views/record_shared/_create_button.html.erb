@@ -1,5 +1,5 @@
 <% if can? :create, model %>
-  <% button_label = t("#{record.pluralize}.register_new_#{record}") %>
+  <% button_label = record == 'case' ? 'Search Case' : t("#{record.pluralize}.register_new_#{record}") %>
   <% if !defined?(modules) || !modules.present? %>
     <%= link_to content_tag(:span, button_label, class: 'create_user'), new_polymorphic_path(record),  class: 'button right' %>
   <% elsif modules.size > 1 %>

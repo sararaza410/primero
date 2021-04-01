@@ -75,5 +75,17 @@ $(function() {
       $("div ." + locale).show().removeClass('hide_element');
     }
   });
+
+  $("body").on("click", ".cp_comprehensive_assessment_subform_interview_with_child input[id*='are_there_other_children_at_risk_in_the_same_home']", function(e) {
+    if($(this).is(':checked')) {
+      $('#subform_cp_comprehensive_assessment_subform_other_childs_number_and_date_of_birth_add_button').click()
+    } else {
+      $('div[id*="subform_container_cp_comprehensive_assessment_subform_other_childs_number_and_date_of_birth"]').each(function(){
+        if(!$(this).hasClass('template')) {
+          $(this).find('.subform_remove').click();
+        }
+      });
+    }
+  });
 });
 

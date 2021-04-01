@@ -63,7 +63,8 @@ module Record
 
     validate :validate_duplicate_of
     validates_with FieldValidator, :type => Field::NUMERIC_FIELD, :min => 0, :max => 130, :pattern_name => /_age$|age/
-    validates_with FieldValidator, :type => Field::NUMERIC_FIELD, :min => -2147483648, :max => 2147483647, :pattern_name => /.+/
+    validates_with FieldValidator, :type => Field::NUMERIC_FIELD, :min => 0000000000, :max => 99999999999, :pattern_name => /contact|phone|landline|mobile/
+    validates_with FieldValidator, :type => Field::NUMERIC_FIELD, :min => -2147483648, :max => 2147483647, :pattern_name => /^(?!.*contact|.*phone|.*mobile|.*landline).*$/
     validates_with FieldValidator, :type => Field::NUMERIC_FIELD
     validates_with FieldValidator, :type => Field::DATE_FIELD
     validates_with FieldValidator, :type => Field::TEXT_AREA

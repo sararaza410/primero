@@ -26,7 +26,7 @@ module Alertable
   end
 
   def current_alert_types
-    self.alerts.map {|a| a[:type]}.uniq
+    self.alerts&.map {|a| a[:type]}&.uniq
   end
 
   def add_alert(alert_for, type = nil, form_sidebar_id = nil, user = nil, agency = nil)

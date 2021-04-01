@@ -1,3 +1,4 @@
+<% unless current_user.roles.map(&:name).include?('Referral') && record.consent_for_services == false %>
 <tr>
   <td class="select_record"><input type="checkbox" class="select_record" value="<%= record.id %>" id="<%= text_to_identify_child(record) %>"></td>
   <% if fields_to_show.include? 'short_id' %>
@@ -65,3 +66,4 @@
   <% end %>
 
 </tr>
+<% end %>

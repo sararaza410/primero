@@ -16,7 +16,8 @@ _primero.Views.FlagRecord = _primero.Views.Base.extend({
     var $target = $(event.target);
     var form_action = $target.data('form_action');
     var flag_error_message = $target.data('submit_error_message');
-    var flag_message = $target.parents('.flag_records').find('input.flag_message').val();
+    var flag_message = $target.parents('.flag_records').find('select.flag_message').val();
+    var flag_comments = $target.parents('.flag_records').find('textarea.flag_comments').val();
     var flag_date = $target.parents('.flag_records').find('input.flag_date').val();
     var flag_date_valid = !($target.parents('.flag_records').find('input.flag_date')[0].hasAttribute('data-invalid'));
     var search_params = this.clean_select_all_page_params();
@@ -33,6 +34,7 @@ _primero.Views.FlagRecord = _primero.Views.Base.extend({
         {
           'selected_records': selected_records,
           'flag_message': flag_message,
+          'flag_comments': flag_comments,
           'flag_date': flag_date,
           'apply_to_all': apply_to_all
         },
