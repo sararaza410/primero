@@ -32,7 +32,7 @@
       <% if field_id == 'basic_information_child_age' %>
         Invalid Child Age. Range: 5 to 17
       <% elsif is_phone_field?(field_id) %>
-        Invalid Phone Number. 11 digits only
+        Invalid Number. Minimum 7 and maximum 11 digits can be entered only.
       <% else %>
         <%= I18n.t("fields.number_not_valid") %>
       <% end %>
