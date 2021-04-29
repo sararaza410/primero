@@ -770,7 +770,7 @@ Primero = _primero.Views.Base.extend({
     if ($el && $el.attr("disabled") !== "disabled") {
       value = $el.val();
       if (value !== "") {
-        return value.match(/^[0-9]{7,11}$/) != null;
+        return value.match(/^[0-9]{7,9}$/) != null;
       } else {
         return !required;
       }

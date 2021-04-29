@@ -15,7 +15,7 @@
   autosum_group += numeric_field["autosum_group"]
   is_disabled = numeric_field.disabled
   disabled = (defined?(is_subform) && is_subform) ? true : is_disabled
-  label = is_phone_field?(field_id) ? [numeric_field.display_name, '(+92)'].join(' ') : numeric_field.display_name
+  label = is_phone_field?(field_id) ? [numeric_field.display_name, '(+92-(3))'].join(' ') : numeric_field.display_name
   validator = field_id == 'basic_information_child_age' ? "primeroChildAge" : is_phone_field?(field_id) ? "primeroContactNo" : "primeroPositiveNumber"
 %>
 <div class="row">
@@ -32,7 +32,7 @@
       <% if field_id == 'basic_information_child_age' %>
         Invalid Child Age. Range: 5 to 17
       <% elsif is_phone_field?(field_id) %>
-        Invalid Number. Minimum 7 and maximum 11 digits can be entered only.
+        Invalid Number. Minimum 7 and maximum 9 digits can be entered only.
       <% else %>
         <%= I18n.t("fields.number_not_valid") %>
       <% end %>
