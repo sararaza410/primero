@@ -35,8 +35,7 @@
       <%= check_box_tag "#{formObject.class.name.underscore.downcase}[hidden_name]", true, false %>
       <%= label_tag "#{formObject.class.name.underscore.downcase}[hidden_name]", hide_text_link_text %>
     <% end %>
-    <% if text_field.help_text %><p class="help"><%= text_field.help_text %></p><% end %>
-    <% if is_phone_field?(field_id) %><p class="help">You can enter minimum 7 and maximum 11 digits only. Starting the number with '0' i.e. Zero</p><% end %>
+    <% if text_field.help_text || is_phone_field?(field_id) %><p class="help"><%= is_phone_field?(field_id) ? "You can enter minimum 7 and maximum 11 digits only. Starting the number with '0' i.e. Zero" : text_field.help_text %></p><% end %>
     <% if text_field.guiding_questions.present? %>
       <%= render 'form_section/guiding_questions', guiding_questions_text: text_field.guiding_questions %>
     <% end %>
