@@ -12,11 +12,10 @@
   hide_text_link_text = formObject.hidden_name ? I18n.t("cases.view_name") : I18n.t("cases.hide_name")
   hide_text_link_action = formObject.hidden_name ? "view" : "protect"
   value = I18n.t("cases.hidden_text_field_text") if text_field.hidden_text_field && formObject.hidden_name && !formObject.new_record?
-
   is_disabled = (text_field.hidden_text_field && formObject.hidden_name && !formObject.new_record?) || text_field.disabled
   field_tags = text_field.field_tags.present? ? text_field.field_tags : []
   disable = (defined?(is_subform) && is_subform) ? true : is_disabled
-
+  validator = is_phone_field?(field_id) ? "primeroContactNo" : ''
 %>
 <div class="row">
   <div class="medium-4 columns">
@@ -26,7 +25,10 @@
   </div>
   <div class="medium-8 columns">
     <% if text_field.required %><span class="required form-section-required">*</span><% end %>
-    <%= text_field_tag name, value, :disabled => disable, :disabled_by_form => text_field.disabled, :is_disabled  => is_disabled, :id => field_id, :data => { :field_tags => field_tags }, required: text_field.required, :"data-abide-ignore" => !text_field.required || (defined?(is_subform) && is_subform) ? "" : nil %>
+    <%= text_field_tag name, value, :disabled => disable, :disabled_by_form => text_field.disabled, :is_disabled  => is_disabled, :id => field_id, :data => { :field_tags => field_tags }, "data-validator" => validator, required: text_field.required, :"data-abide-ignore" => !text_field.required || (defined?(is_subform) && is_subform) ? "" : nil %>
+    <small class="form-error">
+      <%= "Invalid Phone Number. minimum 7 and maximum 11 digits only" if is_phone_field?(field_id) %>
+    </small>
     <%= link_to(hide_text_link_text, hide_text_link_text.dehumanize, :class => "hidden_text_field",
         :action => hide_text_link_action) if show_hide_text_link %>
     <% if text_field.hidden_text_field && formObject.new_record? %>
@@ -34,6 +36,7 @@
       <%= label_tag "#{formObject.class.name.underscore.downcase}[hidden_name]", hide_text_link_text %>
     <% end %>
     <% if text_field.help_text %><p class="help"><%= text_field.help_text %></p><% end %>
+    <% if is_phone_field?(field_id) %><p class="help">You can enter minimum 7 and maximum 11 digits only. Starting the number with '0' i.e. Zero</p><% end %>
     <% if text_field.guiding_questions.present? %>
       <%= render 'form_section/guiding_questions', guiding_questions_text: text_field.guiding_questions %>
     <% end %>
