@@ -25,7 +25,7 @@
   </div>
   <div class="medium-8 columns">
     <% if text_field.required %><span class="required form-section-required">*</span><% end %>
-    <%= text_field_tag name, value, :disabled => disable, :disabled_by_form => text_field.disabled, :is_disabled  => is_disabled, :id => field_id, :data => { :field_tags => field_tags }, "data-validator" => validator, required: text_field.required, :"data-abide-ignore" => !text_field.required || (defined?(is_subform) && is_subform) ? "" : nil %>
+    <%= text_field_tag name, value, :disabled => disable, :disabled_by_form => text_field.disabled, :is_disabled  => is_disabled, :id => field_id, :data => { :field_tags => field_tags }, "data-validator" => validator, required: text_field.required, :"data-abide-ignore" => (!text_field.required || (defined?(is_subform) && is_subform)) && !is_phone_field?(field_id) ? "" : nil %>
     <small class="form-error">
       <%= "Invalid Phone Number. minimum 7 and maximum 11 digits only" if is_phone_field?(field_id) %>
     </small>
