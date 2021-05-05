@@ -600,7 +600,7 @@ class User < CouchRest::Model::Base
         child.owned_by_groups = self.user_group_ids if user_group_ids_changed?
         child.owned_by_phone =  self.phone if phone_changed?
         child.owned_by_agency_office = self.agency_office if agency_office_changed?
-        child.save!
+        child.save(validate: false)
       end
       @refresh_associated_user_groups = user_group_ids_changed?
     end
