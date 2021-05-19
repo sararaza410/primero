@@ -42,6 +42,7 @@ _primero.Views.ReferRecords = _primero.Views.Base.extend({
     this.clear_referral();
     this.clear_errors();
     var $referral_modal = $("#referral-modal");
+    var $referral_button = $(event.target);
     no_consent_count = $referral_button.data('no_consent_count');
     if(no_consent_count == 1) {
       alert('There is no consent provided for this case.');
@@ -49,7 +50,6 @@ _primero.Views.ReferRecords = _primero.Views.Base.extend({
     } else {
       $referral_modal.find("#service_hidden").attr("disabled","disabled");
       $referral_modal.find("#existing_user_hidden").attr("disabled","disabled");
-      var $referral_button = $(event.target);
       self.select_user_location(function(){
         self.clear_user_selection();
         self.set_user_filters();
