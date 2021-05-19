@@ -42,14 +42,19 @@ _primero.Views.ReferRecords = _primero.Views.Base.extend({
     this.clear_referral();
     this.clear_errors();
     var $referral_modal = $("#referral-modal");
-    $referral_modal.find("#service_hidden").attr("disabled","disabled");
-    $referral_modal.find("#existing_user_hidden").attr("disabled","disabled");
-
-    var $referral_button = $(event.target);
-    self.select_user_location(function(){
-      self.clear_user_selection();
-      self.set_user_filters();
-    });
+    no_consent_count = $referral_button.data('no_consent_count');
+    if(no_consent_count == 1) {
+      alert('There is no consent provided for this case.');
+      return false;
+    } else {
+      $referral_modal.find("#service_hidden").attr("disabled","disabled");
+      $referral_modal.find("#existing_user_hidden").attr("disabled","disabled");
+      var $referral_button = $(event.target);
+      self.select_user_location(function(){
+        self.clear_user_selection();
+        self.set_user_filters();
+      });
+    }
   },
 
   refer_records: function (event) {
@@ -63,10 +68,6 @@ _primero.Views.ReferRecords = _primero.Views.Base.extend({
         var total = response['record_count'],
             consent_cnt = response['consent_count'],
             no_consent_cnt = total - consent_cnt;
-        if(no_consent_cnt == 0) {
-          alert('There is no consent provided for this case. ');
-          return false;
-        }
         $("#referral-modal").find(".consent_count").html(no_consent_cnt.toString());
     });
   },
