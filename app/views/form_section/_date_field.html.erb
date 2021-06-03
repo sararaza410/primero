@@ -27,7 +27,7 @@
     :disabled => disabled, :is_disabled => is_disabled, readonly: is_mobile,
     "data-validator" => date_validator, "data-timepicker" => date_field.date_include_time, required: date_field.required, :"data-abide-ignore" => (defined?(is_subform) && is_subform) ? "" : nil %>
     <small class="form-error"><%= I18n.t(error_msg)%></small>
-    <% if date_field.help_text.present? %><p><%= date_field.help_text %></p><% end %>
+    <% if date_field.help_text.present? %><small><%= date_field.help_text %></small><% end %>
     <p class="help"><%= date_field.date_include_time ? t("fields.date_help_with_time") : t("fields.date_help") %></p>
     <% if date_field.guiding_questions.present? %>
       <%= render 'form_section/guiding_questions', guiding_questions_text: date_field.guiding_questions %>
