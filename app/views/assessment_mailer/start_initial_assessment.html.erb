@@ -7,6 +7,6 @@
     <strong><%= @case_type %> Case:</strong>
     <p>For <%= @case_type %> case <%= @child.id %>, start initial assessment within <%= @hours %> hours.</p>
     <p>Due date to start initial assessment: <%= @due_date %></p>
-    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id)).html_safe %></p>
+    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
   </body>
 </html>

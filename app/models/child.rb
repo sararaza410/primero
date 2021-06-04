@@ -475,7 +475,7 @@ class Child < CouchRest::Model::Base
     end
 
     def check_date_and_time_initial_assessment_completed
-      return if self.changes['date_and_time_initial_assessment_completed'].eql?([nil, ""]) && self.date_and_time_initial_assessment_completed.blank?
+      return if self.changes['date_and_time_initial_assessment_completed'].eql?([nil, ""]) || self.date_and_time_initial_assessment_completed.blank?
       self.due_date_for_comprehensive_assessment = self.date_and_time_initial_assessment_completed.to_date + 15.days
       username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
       user_id = User.find_by_user_name(username).id

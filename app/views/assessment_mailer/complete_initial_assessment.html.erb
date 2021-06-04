@@ -11,6 +11,6 @@
     <% else %>
       <p>Due date to complete initial assessment: <%= @due_date %></p>
     <% end %>
-    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id)).html_safe %></p>
+    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
   </body>
 </html>
