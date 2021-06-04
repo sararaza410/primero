@@ -468,17 +468,21 @@ class Child < CouchRest::Model::Base
     def check_registration_completion_date
       return if self.changes['registration_completion_date'].eql?([nil, ""])
       self.assessment_due_date = self.registration_completion_date.to_date + 10.days
+      case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
+      due_date = self.registration_completion_date + (self.is_this_a_significant_harm_case ? 24.hours : 72.hours)
+      hours = self.is_this_a_significant_harm_case ? 24 : 72
       username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
       user_id = User.find_by_user_name(username).id
-      AssessmentMailer.start_initial_assessment(self.id, user_id).deliver_later
-      AssessmentMailer.complete_initial_assessment(self.id, user_id).deliver_later
+      AssessmentMailer.start_initial_assessment(self.id, user_id, case_type, due_date, hours).deliver_later
+      AssessmentMailer.complete_initial_assessment(self.id, user_id, case_type, self.assessment_due_date).deliver_later
     end
 
     def check_date_and_time_initial_assessment_completed
       return if self.changes['date_and_time_initial_assessment_completed'].eql?([nil, ""]) || self.date_and_time_initial_assessment_completed.blank?
       self.due_date_for_comprehensive_assessment = self.date_and_time_initial_assessment_completed.to_date + 15.days
+      case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
       username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
       user_id = User.find_by_user_name(username).id
-      AssessmentMailer.start_comprehensive_assessment(self.id, user_id).deliver_later
+      AssessmentMailer.start_comprehensive_assessment(self.id, user_id, case_type, self.due_date_for_comprehensive_assessment).deliver_later
     end
 end

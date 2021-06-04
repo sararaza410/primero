@@ -1,10 +1,10 @@
 class AssessmentMailer < ActionMailer::Base
-  def start_initial_assessment(case_id, user_id)
+  def start_initial_assessment(case_id, user_id, case_type, due_date, hours)
     @user = User.get(user_id)
     @child = Child.get(case_id)
-    @case_type = @child.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
-    @due_date = @child.registration_completion_date + (@child.is_this_a_significant_harm_case ? 24.hours : 72.hours)
-    @hours = @child.is_this_a_significant_harm_case ? 24 : 72
+    @case_type = case_type
+    @due_date = due_date
+    @hours = hours
     @url = "https://primerouat.septemsystems.com/"
 
     if @child.present?
@@ -15,11 +15,11 @@ class AssessmentMailer < ActionMailer::Base
     end
   end
 
-  def complete_initial_assessment(case_id, user_id)
+  def complete_initial_assessment(case_id, user_id, case_type, due_date)
     @user = User.get(user_id)
     @child = Child.get(case_id)
-    @case_type = @child.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
-    @due_date = @child.assessment_due_date
+    @case_type = case_type
+    @due_date = due_date
     @url = "https://primerouat.septemsystems.com/"
 
     if @child.present?
@@ -30,11 +30,11 @@ class AssessmentMailer < ActionMailer::Base
     end
   end
 
-  def start_comprehensive_assessment(case_id, user_id)
+  def start_comprehensive_assessment(case_id, user_id, case_type, due_date)
     @user = User.get(user_id)
     @child = Child.get(case_id)
-    @case_type = @child.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
-    @due_date = @child.due_date_for_comprehensive_assessment
+    @case_type = case_type
+    @due_date = due_date
     @url = "https://primerouat.septemsystems.com/"
 
     if @child.present?
