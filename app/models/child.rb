@@ -467,4 +467,5 @@ class Child < CouchRest::Model::Base
     def check_registration_completion_date
       return if self.changes['registration_completion_date'].eql?([nil, ""])
       self.assessment_due_date = self.registration_completion_date.to_date + 10.days
+    end
 end
