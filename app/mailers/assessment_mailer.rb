@@ -5,7 +5,7 @@ class AssessmentMailer < ActionMailer::Base
     @case_type = @child.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
     @due_date = @child.registration_completion_date + (@child.is_this_a_significant_harm_case ? 24.hours : 72.hours)
     @hours = @child.is_this_a_significant_harm_case ? 24 : 72
-    @url = host_url
+    @url = Rails.root
 
     if @child.present?
       mail(:to => @user.email,
@@ -20,7 +20,7 @@ class AssessmentMailer < ActionMailer::Base
     @child = Child.get(case_id)
     @case_type = @child.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
     @due_date = @child.assessment_due_date
-    @url = host_url
+    @url = Rails.root
 
     if @child.present?
       mail(:to => @user.email,
@@ -35,7 +35,7 @@ class AssessmentMailer < ActionMailer::Base
     @child = Child.get(case_id)
     @case_type = @child.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
     @due_date = @child.due_date_for_comprehensive_assessment
-    @url = host_url
+    @url = Rails.root
 
     if @child.present?
       mail(:to => @user.email,
