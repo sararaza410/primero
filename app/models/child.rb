@@ -475,6 +475,7 @@ class Child < CouchRest::Model::Base
       user_id = User.find_by_user_name(username).id
       AssessmentMailer.start_initial_assessment(self.id, user_id, case_type, due_date.to_s, hours).deliver_later
       AssessmentMailer.complete_initial_assessment(self.id, user_id, case_type, self.assessment_due_date.to_s).deliver_later
+      AssessmentMailJob.set(wailt_until: Time.now + 5.days).perform_later(case_id, user_id, due_date.to_s) if self.is_this_a_significant_harm_case
     end
 
     def check_date_and_time_initial_assessment_completed
