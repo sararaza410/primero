@@ -10,7 +10,9 @@
    value ||= field_value formObject, date_field, field_keys
    date_validator = date_field.date_validation == 'not_future_date' ? "primeroDateNotInFuture" : "primeroDate"
    error_msg = date_field.date_validation == 'not_future_date' ? "fields.future_date_not_valid" : "fields.date_not_valid"
-   is_disabled = date_field.disabled || (formObject.persisted? && field_id == 'summary_child_registration_completion_date' && formObject.registration_completion_date.present?)
+   is_disabled = date_field.disabled || (formObject.persisted? &&
+                (field_id == 'summary_child_registration_completion_date' && formObject.registration_completion_date.present?) ||
+                (field_id == 'schedule_initial_assessment__child_assessment_due_date' && formObject.assessment_due_date.present?))
    disabled = (defined?(is_subform) && is_subform) ? true : is_disabled
    is_mobile = (defined?(is_mobile) && is_mobile) || (defined?(is_mobile?) && is_mobile?)
 %>
