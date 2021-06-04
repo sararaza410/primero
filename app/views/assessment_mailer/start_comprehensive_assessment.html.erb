@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <strong><%= @case_type %> Case:</strong>
+    <p>For <%= @case_type %> case <%= @child.id %> , start comprehensive assessment within 15 days.</p>
+    <p>Due date to start comprehensive assessment: <%= @due_date %></p>
+    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id)).html_safe %></p>
+  </body>
+</html>
