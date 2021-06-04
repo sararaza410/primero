@@ -468,7 +468,7 @@ class Child < CouchRest::Model::Base
     def check_registration_completion_date
       return if self.changes['registration_completion_date'].eql?([nil, ""])
       self.assessment_due_date = self.registration_completion_date.to_date + 10.days
-      user_id = User.find_by_user_name(self.changes['last_updated_by']).id
+      user_id = User.find_by_user_name(self.changes['last_updated_by'][0]).id
       AssessmentMailer.start_initial_assessment(self.id, user_id).deliver_later
       AssessmentMailer.complete_initial_assessment(self.id, user_id).deliver_later
     end
@@ -476,7 +476,7 @@ class Child < CouchRest::Model::Base
     def check_date_and_time_initial_assessment_completed
       return if self.changes['date_and_time_initial_assessment_completed'].eql?([nil, ""])
       self.due_date_for_comprehensive_assessment = self.date_and_time_initial_assessment_completed&.to_date + 15.days
-      user_id = User.find_by_user_name(self.changes['last_updated_by']).id
+      user_id = User.find_by_user_name(self.changes['last_updated_by'][0]).id
       AssessmentMailer.start_comprehensive_assessment(self.id, user_id).deliver_later
     end
 end
