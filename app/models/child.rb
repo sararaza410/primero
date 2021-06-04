@@ -81,6 +81,7 @@ class Child < CouchRest::Model::Base
   before_save :sync_protection_concerns
   before_save :auto_populate_name
   before_save :update_transition_change_at
+  before_save :check_registration_completion_date
 
   def initialize *args
     self['photo_keys'] ||= []
@@ -462,4 +463,9 @@ class Child < CouchRest::Model::Base
     case_id_display
   end
 
+  private
+    def check_registration_completion_date
+      return if self.changes['registration_completion_date'].eql?([nil, ""])
+      self.assessment_due_date = self.registration_completion_date.to_date + 10.days if self.is_this_a_significant_harm_case?
+    end
 end
