@@ -38,8 +38,6 @@ Primero::Application.configure do
 
   config.log_level = :debug
 
-  config.action_mailer.default_url_options = { host: "https://primerouat.septemsystems.com/" }
-
   # WARNING **
   # NEVER UNSET THIS OR YOU WILL BREAK THINGS!
   # config.force_ssl = true
