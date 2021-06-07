@@ -466,7 +466,7 @@ class Child < CouchRest::Model::Base
 
   private
     def check_registration_completion_date
-      return if self.changes['registration_completion_date'].eql?([nil, ""])
+      return if self.changes['registration_completion_date'].eql?([nil, ""]) || self.registration_completion_date.blank?
       self.assessment_due_date = self.registration_completion_date.to_date + 10.days
       case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
       due_date = (self.registration_completion_date + (self.is_this_a_significant_harm_case ? 24.hours : 72.hours)).to_date
