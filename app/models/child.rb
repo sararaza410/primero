@@ -466,24 +466,26 @@ class Child < CouchRest::Model::Base
 
   private
     def check_registration_completion_date
-      return if self.changes['registration_completion_date'].eql?([nil, ""]) || self.registration_completion_date.blank?
-      self.assessment_due_date = self.registration_completion_date.to_date + 10.days
-      case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
-      due_date = (self.registration_completion_date + (self.is_this_a_significant_harm_case ? 24.hours : 72.hours)).to_date
-      hours = self.is_this_a_significant_harm_case ? 24 : 72
-      username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
-      user_id = User.find_by_user_name(username).id
-      AssessmentMailer.start_initial_assessment(self.id, user_id, case_type, due_date.to_s, hours).deliver_later
-      AssessmentMailer.complete_initial_assessment(self.id, user_id, case_type, self.assessment_due_date.to_s).deliver_later
-      AssessmentMailJob.set(wailt_until: Time.now + 5.days).perform_later(case_id, user_id, due_date.to_s) if self.is_this_a_significant_harm_case
+      if self.changes['registration_completion_date'].present? && !self.changes['registration_completion_date'].eql?([nil, ""])
+        self.assessment_due_date = self.registration_completion_date.to_date + 10.days
+        case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
+        due_date = (self.registration_completion_date + (self.is_this_a_significant_harm_case ? 24.hours : 72.hours)).to_date
+        hours = self.is_this_a_significant_harm_case ? 24 : 72
+        username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
+        user_id = User.find_by_user_name(username).id
+        AssessmentMailer.start_initial_assessment(self.id, user_id, case_type, due_date.to_s, hours).deliver_later
+        AssessmentMailer.complete_initial_assessment(self.id, user_id, case_type, self.assessment_due_date.to_s).deliver_later
+        AssessmentMailJob.set(wailt_until: Time.now + 5.days).perform_later(case_id, user_id, due_date.to_s) if self.is_this_a_significant_harm_case
+      end
     end
 
     def check_date_and_time_initial_assessment_completed
-      return if self.changes['date_and_time_initial_assessment_completed'].eql?([nil, ""]) || self.date_and_time_initial_assessment_completed.blank?
-      self.due_date_for_comprehensive_assessment = self.date_and_time_initial_assessment_completed.to_date + 15.days
-      case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
-      username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
-      user_id = User.find_by_user_name(username).id
-      AssessmentMailer.start_comprehensive_assessment(self.id, user_id, case_type, self.due_date_for_comprehensive_assessment.to_s).deliver_later
+      if self.changes['date_and_time_initial_assessment_completed'].present? && !self.changes['date_and_time_initial_assessment_completed'].eql?([nil, ""])
+        self.due_date_for_comprehensive_assessment = self.date_and_time_initial_assessment_completed.to_date + 15.days
+        case_type = self.is_this_a_significant_harm_case ? 'Significant Harm' : 'Regular'
+        username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'][0] : self.owned_by
+        user_id = User.find_by_user_name(username).id
+        AssessmentMailer.start_comprehensive_assessment(self.id, user_id, case_type, self.due_date_for_comprehensive_assessment.to_s).deliver_later
+      end
     end
 end
