@@ -4,6 +4,6 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>User <%= @record_owner %> has created the following case <%= @case_id %>.</p>
+    <p>User <%= @record_owner %> has created the following case <%= link_to @case_id, case_url(@case_id) %>.</p>
   </body>
 </html>
