@@ -85,4 +85,11 @@ class NotificationMailer < ApplicationMailer
     mail(:to => @owner_email,
          :subject => t("email_notification.transfer_request_subject"))
   end
+
+  def new_case(case_id, user_id, record_owner, host_url)
+    @user = User.get(user_id)
+    @case_id = case_id
+    @record_owner = record_owner
+    mail(to: @user.email, subject: "Case: #{@case_id} - Case created")
+  end
 end

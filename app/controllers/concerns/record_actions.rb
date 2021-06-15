@@ -167,6 +167,12 @@ module RecordActions
     @record = create_or_update_record(params[:id], permitted_property_names)
     respond_to do |format|
       if @record.save
+        if model_class == 'Case'
+          @dcpu_users = User.all.select{ |u| u.has_user_group_id?(current_user.user_group_ids[0]) && u.roles.map(&:name).include?('DCPU Admin') }
+          @dcpu_users.each do |dcpu_user|
+            NotificationMailer.new_case(@record.id, dcpu_user.email, @record.created_by_full_name, request.base_url).deliver_later
+          end
+        end
         post_save_processing @record
         flash[:notice] = t("#{model_class.locale_prefix}.messages.creation_success", record_id: @record.short_id)
         format.html { redirect_after_update }
