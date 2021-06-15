@@ -170,6 +170,7 @@ module RecordActions
         if model_class == Child
           @dcpu_users = User.all.select{ |u| u.has_user_group_id?(current_user.user_group_ids[0]) && u.roles.map(&:name).include?('DCPU Admin') }
           @dcpu_users.each do |dcpu_user|
+            next unless dcpu_user.email.present?
             NotificationMailer.new_case(@record.id, dcpu_user.id, @record.created_by_full_name, request.base_url).deliver_later
           end
         end
