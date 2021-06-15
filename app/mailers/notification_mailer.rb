@@ -90,6 +90,7 @@ class NotificationMailer < ApplicationMailer
     @user = User.get(user_id)
     @case_id = case_id
     @record_owner = record_owner
+    @url = "#{host_url}/cases/#{@case_id}"
     mail(to: @user.email, subject: "Case: #{@case_id} - Case created")
   end
 end
