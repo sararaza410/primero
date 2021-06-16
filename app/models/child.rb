@@ -83,6 +83,7 @@ class Child < CouchRest::Model::Base
   before_save :update_transition_change_at
   before_save :check_registration_completion_date
   before_save :check_date_and_time_initial_assessment_completed
+  before_create :populate_date_of_birth
 
   def initialize *args
     self['photo_keys'] ||= []
@@ -487,5 +488,10 @@ class Child < CouchRest::Model::Base
         user_id = User.find_by_user_name(username).id
         AssessmentMailer.start_comprehensive_assessment(self.id, user_id, case_type, self.due_date_for_comprehensive_assessment.to_s).deliver_later
       end
+    end
+
+    def populate_date_of_birth
+      return unless self.age.present?
+      self.date_of_birth = Date.today.beginning_of_year - self.age.years
     end
 end
