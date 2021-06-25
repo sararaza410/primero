@@ -8,6 +8,7 @@ class TasksController < ApplicationController
     cases = Child.by_owned_by.key(current_user.user_name)
             .select{|c| c.record_state && c.child_status == Child::STATUS_OPEN}
     @tasks = Task.from_case(cases)
+    @tasks = @tasks.reject{ |c| c.priority.nil? }.sort_by(&:priority) + @tasks.select{|c| c.priority.nil?}
     @tasks = @tasks.paginate
 
 
