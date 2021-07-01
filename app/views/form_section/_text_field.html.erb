@@ -17,7 +17,7 @@
   disable = (defined?(is_subform) && is_subform) ? true : is_disabled
   validator = is_phone_field?(field_id) ? "primeroContactNo" : ''
 %>
-<div class="row">
+<div class="row" style="<%= 'display: none;' if field_id.include?("_others_specify") %>">
   <div class="medium-4 columns">
     <span class="tool-tip-label">
       <%= label_tag field_id, text_field.display_name, :class=>'key inline' %>

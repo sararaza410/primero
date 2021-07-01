@@ -87,5 +87,13 @@ $(function() {
       });
     }
   });
+
+  $("body").on("click", "[id^='protection_needs_and_capacity_child_cp_comprehensive_assessment_subform_protection_needs_and_capacity_'][id$='_others']", function() {
+    if($(this).is(':checked')) {
+        $(this).parents('.row').first().next().show();
+    } else {
+        $(this).parents('.row').first().next().hide();
+    }
+  });
 });
 
