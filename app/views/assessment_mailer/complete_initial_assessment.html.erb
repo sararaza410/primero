@@ -4,13 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <strong><%= @case_type %> Case:</strong>
-    <p>For <%= @case_type %> case <%= @child.id %>, complete initial assessment <%= "#{@child.is_significant_harm_case? ? 'before' : 'within'}" %> 10 days.</p>
-    <% if @child.is_significant_harm_case? %>
-      <p>Initial assessment should be completed before the following date: <%= @due_date %></p>
+    <% if @case_type == 'Regular' %>
+      <p>
+        This is an alert email for <%= @case_type %> case <%= @child.id %>, kindly complete Initial Assessment within 10 days of receiving the report on Protection Concerns. Please begin working on this as soon as possible.
+      </p>
+      <p>Due date to complete Initial Assessment is: <%= @due_date %></p>
     <% else %>
-      <p>Due date to complete initial assessment: <%= @due_date %></p>
+      <p>This is an alert email for <%= @case_type %> case <%= @child.id %>, kindly expedite the process to complete the Initial Assessment on time.</p>
+      <p>Initial assessment should be completed as soon as possible and no later than: <%= @due_date %></p>
     <% end %>
-    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
+    <p>Refer to Case ID: <%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
   </body>
 </html>

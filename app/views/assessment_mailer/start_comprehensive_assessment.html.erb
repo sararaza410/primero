@@ -4,9 +4,11 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <strong><%= @case_type %> Case:</strong>
-    <p>For <%= @case_type %> case <%= @child.id %> , start comprehensive assessment within 15 days.</p>
-    <p>Due date to start comprehensive assessment: <%= @due_date %></p>
-    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
+    <p>This is an alert email for <%= @case_type %> case <%= @child.id %> , start comprehensive assessment within 15 days of the completion of the Initial Assessment.</p>
+    <% if @case_type == 'Significant Harm' %>
+      <p>As this is a significant harm case, you are requested to complete the assessment as soon as possible.</p>
+    <% end %>
+    <p>Due date to start Comprehensive Assessment is: <%= @due_date %></p>
+    <p>Refer to Case ID: <%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
   </body>
 </html>

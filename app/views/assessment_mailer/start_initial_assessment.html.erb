@@ -4,9 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <strong><%= @case_type %> Case:</strong>
-    <p>For <%= @case_type %> case <%= @child.id %>, start initial assessment within <%= @hours %> hours.</p>
-    <p>Due date to start initial assessment: <%= @due_date %></p>
-    <p><%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
+    <p>
+      This is an alert email for <%= @case_type %> case <%= @child.id %>, kindly start the Initial assessment
+      <% if @case_type == 'Regular' %>
+        within <%= @hours %> hours of receipt of report on Child Protection Concern.
+      <% else %>
+        as soon as possible, and no later than 24 hours of receiving the report.
+      <% end %>
+    </p>
+    <p>Due date to start Initial Assessment is: <%= @due_date %></p>
+    <p>Refer to Case ID: <%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
   </body>
 </html>
