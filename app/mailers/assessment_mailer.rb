@@ -5,7 +5,7 @@ class AssessmentMailer < ActionMailer::Base
     @case_type = case_type
     @due_date = due_date
     @hours = hours
-    @url = "https://primerouat.septemsystems.com/"
+    @url = "https://primerouat.septemsystems.com"
 
     if @child.present?
       mail(:to => @user.email,
@@ -20,7 +20,7 @@ class AssessmentMailer < ActionMailer::Base
     @child = Child.get(case_id)
     @case_type = case_type
     @due_date = due_date
-    @url = "https://primerouat.septemsystems.com/"
+    @url = "https://primerouat.septemsystems.com"
 
     if @child.present?
       mail(:to => @user.email,
@@ -34,7 +34,7 @@ class AssessmentMailer < ActionMailer::Base
     @user = User.get(user_id)
     @child = Child.get(case_id)
     @due_date = due_date
-    @url = "https://primerouat.septemsystems.com/"
+    @url = "https://primerouat.septemsystems.com"
 
     if @child.present?
       mail(:to => @user.email,
@@ -49,7 +49,7 @@ class AssessmentMailer < ActionMailer::Base
     @child = Child.get(case_id)
     @case_type = case_type
     @due_date = due_date
-    @url = "https://primerouat.septemsystems.com/"
+    @url = "https://primerouat.septemsystems.com"
 
     if @child.present?
       mail(:to => @user.email,
