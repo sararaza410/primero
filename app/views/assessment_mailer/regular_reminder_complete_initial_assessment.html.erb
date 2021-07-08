@@ -4,7 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>This is a reminder email for Significant Harm Case <%= @child.id %>, kindly expedite the process to complete initial assessment.</p>
+    <p>This is a reminder email for Regular Case <%= @child.id %>, kindly expedite the process to complete initial assessment.</p>
     <p>Initial assessment should be completed as soon as possible but not later than: <%= @due_date %></p>
     <p>Refer to the Case ID: <%= link_to(@child.short_id, @url + '/cases/' + @child.id).html_safe %></p>
   </body>

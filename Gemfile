@@ -17,7 +17,7 @@ gem 'validatable',    '1.6.7'
 gem 'dynamic_form',   '~> 1.1.4'
 gem 'rake',           '~> 12.3.0'
 gem 'jquery-rails'
-
+gem 'whenever'
 #TODO - keeping cancancan at 1.9.2 for now.  Newer versions seem to break.
 gem 'cancancan',      '~> 1.9.2'
 gem 'highline',       '~> 1.7.8'
