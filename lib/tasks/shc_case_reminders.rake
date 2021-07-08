@@ -6,7 +6,7 @@ namespace :cases do
          child.registration_completion_date.present? &&
          child.date_and_time_initial_assessment_completed.blank?
 
-        due_date = child.assessment_due_date
+        due_date = child.assessment_due_date.to_s
         username = child.changes['last_updated_by'].present? ? child.changes['last_updated_by'].last : child.owned_by
         user_id = User.find_by_user_name(username).id
         puts child.case_id
