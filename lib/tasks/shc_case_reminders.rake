@@ -4,7 +4,8 @@ namespace :cases do
     Child.all.all.each do |child|
       if child.is_this_a_significant_harm_case &&
          child.registration_completion_date.present? &&
-         child.date_and_time_initial_assessment_completed.blank?
+         child.date_and_time_initial_assessment_completed.blank? &&
+         Date.today < child.assessment_due_date
 
         due_date = child.assessment_due_date.to_s
         username = child.changes['last_updated_by'].present? ? child.changes['last_updated_by'].last : child.owned_by
