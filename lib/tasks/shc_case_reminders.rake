@@ -11,7 +11,7 @@ namespace :cases do
         user_id = User.find_by_user_name(username).id
         puts child.case_id
 
-        AssessmentMailer.shc_reminder_complete_initial_assessment(case_id, user_id, due_date).deliver_later
+        AssessmentMailer.shc_reminder_complete_initial_assessment(child.case_id, user_id, due_date).deliver_later
       end
     end
   end
