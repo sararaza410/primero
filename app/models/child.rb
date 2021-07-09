@@ -468,7 +468,11 @@ class Child < CouchRest::Model::Base
   private
     def check_registration_completion_date
       if self.changes['registration_completion_date'].present? && !self.changes['registration_completion_date'].eql?([nil, ""])
-        self.assessment_due_date = self.registration_completion_date.to_date + self.is_this_a_significant_harm_case ? 3.days : 10.days
+        if self.is_this_a_significant_harm_case
+          self.assessment_due_date = self.registration_completion_date.to_date + 3.days
+        else
+          self.assessment_due_date = self.registration_completion_date.to_date + 10.days
+        end
         due_date = self.assessment_due_date
         username = self.changes['last_updated_by'].present? ? self.changes['last_updated_by'].last : self.owned_by
         user_id = User.find_by_user_name(username).id
