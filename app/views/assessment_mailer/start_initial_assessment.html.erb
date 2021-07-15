@@ -4,6 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
+    <p><%= @case_type %> Case:</p>
     <p>
       This is an alert email for <%= @case_type %> case <%= @child.id %>, kindly start the Initial assessment
       <% if @case_type == 'Regular' %>

@@ -4,6 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
+    <p><%= @case_type %> Case:</p>
     <p>This is an alert email for <%= @case_type %> case <%= @child.id %> , start comprehensive assessment within 15 days of the completion of the Initial Assessment.</p>
     <% if @case_type == 'Significant Harm' %>
       <p>As this is a significant harm case, you are requested to complete the assessment as soon as possible.</p>
